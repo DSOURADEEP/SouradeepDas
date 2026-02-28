@@ -7,16 +7,17 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: rgba(26, 32, 44, 0.8);
+  background-color: var(--header-bg);
   backdrop-filter: blur(10px);
   z-index: 1000;
-  border-bottom: 1px solid #2d3748;
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #e2e8f0;
+  color: var(--text-color);
   flex: 1;
 }
 
@@ -45,32 +46,54 @@
   align-items: center;
   font-size: 1.2rem;
   font-weight: bold;
-  color: #a0aec0;
+  color: var(--text-dim);
   user-select: none;
   z-index: 2;
   transition: color 0.3s ease;
-  pointer-events: auto; /* Enable clicks */
+  pointer-events: auto;
   cursor: pointer;
 }
 
 .navItem.active {
-  color: #e2e8f0;
-  transform: scale(1.05); /* Keep subtle highlight */
+  color: var(--text-color);
+  transform: scale(1.05);
 }
 
 .selector {
   position: absolute;
   top: 0;
-  left: 0; /* Will be driven by JS now */
+  left: 0;
   width: 120px;
   height: 60px;
-  border: 3px solid #38b2ac;
+  border: 3px solid var(--primary);
   border-radius: 30px;
-  cursor: pointer; /* No longer draggable, so cursor should be pointer */
+  cursor: pointer;
   z-index: 1;
   box-shadow: 0 0 10px rgba(56, 178, 172, 0.5);
 }
 
-.selector:active {
-  cursor: pointer; /* No grabbing cursor */
+.themeToggle {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.themeToggle:hover {
+  background-color: var(--bg-alt);
+}
+
+@media (max-width: 768px) {
+  .logo {
+    display: none;
+  }
 }

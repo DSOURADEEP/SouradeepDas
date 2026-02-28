@@ -1,19 +1,21 @@
 import { useState, useRef, useEffect } from 'react';
 import styles from './Chatbot.module.css';
 import { motion, AnimatePresence } from 'framer-motion';
-import { scroller } from 'react-scroll';
 import { BsChatDotsFill } from 'react-icons/bs';
 import { IoClose } from 'react-icons/io5';
+import { portfolioData } from '../../data/data';
 
 const suggestedQuestions = [
-  'What technologies does Souradeep know?',
-  'Show me his work experience.',
-  'What projects has he built?',
+  'What are your top projects?',
+  'What is your experience in SRE?',
+  'Which tech stack do you use?',
 ];
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<{ type: 'user' | 'bot'; text: string }[]>([]);
+  const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -22,32 +24,35 @@ const Chatbot = () => {
 
   useEffect(scrollToBottom, [messages]);
 
-  const handleQuestion = (question: string) => {
-    setMessages((prev) => [...prev, { type: 'user', text: question }]);
+  const handleSend = async (message: string) => {
+    if (!message.trim()) return;
 
-    setTimeout(() => {
-      let targetSection = '';
-      const q = question.toLowerCase();
+    setMessages((prev) => [...prev, { type: 'user', text: message }]);
+    setIsLoading(true);
 
-      if (q.includes('skill') || q.includes('tech')) {
-        targetSection = 'skills';
-      } else if (q.includes('experience') || q.includes('work')) {
-        targetSection = 'history';
-      } else if (q.includes('project')) {
-        targetSection = 'projects';
-      } else {
-        setMessages((prev) => [...prev, { type: 'bot', text: 'Sorry, I can only navigate to sections. Please try one of the suggested questions.' }]);
-        return;
-      }
-      
-      setMessages((prev) => [...prev, { type: 'bot', text: 'Sure, I will show you that!' }]);
-      
-      setTimeout(() => {
-        scroller.scrollTo(targetSection, { smooth: true, duration: 500, offset: -80 });
-        setIsOpen(false);
-      }, 1000);
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message, context: portfolioData }),
+      });
 
-    }, 500);
+      if (!response.ok) throw new Error('Failed to fetch response');
+
+      const data = await response.json();
+      setMessages((prev) => [...prev, { type: 'bot', text: data.text }]);
+    } catch (error) {
+      console.error('Chat error:', error);
+      setMessages((prev) => [...prev, { type: 'bot', text: 'Sorry, I am having trouble connecting right now.' }]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleInputSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    handleSend(input);
+    setInput('');
   };
 
   return (
@@ -61,24 +66,43 @@ const Chatbot = () => {
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
           >
             <div className={styles.chatHeader}>
-              <p>Souradeep's Assistant</p>
+              <p>Souradeep's AI Assistant</p>
               <button onClick={() => setIsOpen(false)} className={styles.closeBtn}>X</button>
             </div>
             <div className={styles.chatMessages}>
-              <div className={styles.messageContainer}>
-                <p className={styles.botMessage}>Hello! How can I help you navigate the portfolio?</p>
+              <div className={styles.messageContainer} style={{ justifyContent: 'flex-start' }}>
+                <p className={styles.botMessage}>Hello! I'm an AI trained on Souradeep's portfolio. Ask me anything!</p>
               </div>
               {messages.map((msg, index) => (
                 <div key={index} className={styles.messageContainer} style={{ justifyContent: msg.type === 'user' ? 'flex-end' : 'flex-start' }}>
                   <p className={msg.type === 'user' ? styles.userMessage : styles.botMessage}>{msg.text}</p>
                 </div>
               ))}
+              {isLoading && (
+                <div className={styles.messageContainer} style={{ justifyContent: 'flex-start' }}>
+                  <p className={styles.botMessage}>Thinking...</p>
+                </div>
+              )}
               <div ref={messagesEndRef} />
             </div>
             <div className={styles.chatInputArea}>
-                {suggestedQuestions.map(q => (
-                    <button key={q} className={styles.suggestionBtn} onClick={() => handleQuestion(q)}>{q}</button>
+              <div className={styles.suggestions}>
+                {suggestedQuestions.map((q) => (
+                  <button key={q} className={styles.suggestionBtn} onClick={() => handleSend(q)} disabled={isLoading}>
+                    {q}
+                  </button>
                 ))}
+              </div>
+              <form onSubmit={handleInputSubmit} className={styles.inputForm}>
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Ask a question..."
+                  disabled={isLoading}
+                />
+                <button type="submit" disabled={isLoading || !input.trim()}>Send</button>
+              </form>
             </div>
           </motion.div>
         )}

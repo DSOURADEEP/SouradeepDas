@@ -5,8 +5,8 @@
   min-height: 100vh;
   padding-top: 6rem;
   text-align: center;
-  color: #e2e8f0;
-  background: linear-gradient(45deg, #2d3748, #1a202c);
+  color: var(--text-color);
+  background: var(--bg-color);
   position: relative;
   overflow: hidden;
 }
@@ -24,7 +24,7 @@
 .nameTitle {
   font-size: 5rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-color);
   margin-bottom: 1rem;
 }
 
@@ -32,7 +32,7 @@
   font-size: 2rem;
   margin-bottom: 1.5rem;
   font-weight: 400;
-  color: #a0aec0;
+  color: var(--text-dim);
 }
 
 .description {
@@ -40,7 +40,7 @@
   line-height: 1.7;
   max-width: 700px;
   margin-bottom: 2.5rem;
-  color: #a0aec0;
+  color: var(--text-dim);
 }
 
 .buttonContainer {
@@ -57,12 +57,12 @@
   border-radius: 50px;
   cursor: pointer;
   text-decoration: none;
-  transition: all 0.3s ease; /* Added global transition */
+  transition: all 0.3s ease;
 }
 
 .ctaButton {
-  background: #38b2ac;
-  color: #1a202c;
+  background: var(--primary);
+  color: white;
   box-shadow: 0 5px 15px rgba(56, 178, 172, 0.3);
 }
 
@@ -73,8 +73,8 @@
 
 .ctaButtonAlt {
   background: transparent;
-  color: #38b2ac;
-  border: 2px solid #38b2ac;
+  color: var(--primary);
+  border: 2px solid var(--primary);
 }
 
 .ctaButtonAlt:hover {
@@ -85,20 +85,21 @@
 
 .bubble {
   position: absolute;
-  color: rgba(160, 174, 192, 0.1);
+  color: var(--text-dim);
+  opacity: 0.1;
   z-index: 0;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background-color: rgba(160, 174, 192, 0.05);
-  transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+  background-color: var(--bg-alt);
+  transition: all 0.3s ease;
 }
 
 .bubble:hover {
-  color: rgba(226, 232, 240, 0.8);
-  background-color: rgba(160, 174, 192, 0.1);
+  opacity: 0.8;
+  color: var(--primary);
   transform: scale(1.1);
 }
 
@@ -107,8 +108,8 @@
   bottom: 110%;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #1a202c;
-  color: #e2e8f0;
+  background-color: var(--bg-alt);
+  color: var(--text-color);
   padding: 0.5rem 1rem;
   border-radius: 8px;
   font-size: 0.9rem;

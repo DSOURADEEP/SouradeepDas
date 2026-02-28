@@ -2,11 +2,14 @@ import { useState, useRef, useEffect } from "react";
 import { scroller } from "react-scroll";
 import styles from "./Header.module.css";
 import { motion, useMotionValue, animate } from "framer-motion";
+import { useTheme } from "../../context/ThemeContext";
+import { FaSun, FaMoon } from "react-icons/fa";
 
 const navItems = ["Home", "Projects", "History", "Skills"];
 const ITEM_WIDTH = 120; // Assuming each nav item has this width
 
 const Header = ({ visibleSection }: { visibleSection: string }) => {
+  const { theme, toggleTheme } = useTheme();
   const [activeIndex, setActiveIndex] = useState(0);
   const selectorX = useMotionValue(0); // MotionValue for the selector's x position
   const navItemRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -70,6 +73,9 @@ const Header = ({ visibleSection }: { visibleSection: string }) => {
           onClick={() => handleClick(activeIndex)} // Clicking selector also navigates
         />
       </nav>
+      <button className={styles.themeToggle} onClick={toggleTheme}>
+        {theme === 'light' ? <FaMoon /> : <FaSun />}
+      </button>
     </header>
   );
 };

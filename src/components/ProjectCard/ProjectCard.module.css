@@ -1,20 +1,23 @@
 .card {
-  border: 1px solid #2d3748;
+  border: 1px solid var(--border-color);
   border-radius: 15px;
   padding: 2rem;
-  background-color: rgba(45, 55, 72, 0.7); backdrop-filter: blur(5px);
+  background-color: var(--card-bg);
+  backdrop-filter: blur(5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
   cursor: pointer;
+  height: 100%;
 }
 
 .card:hover {
-  border-color: #38b2ac;
+  border-color: var(--primary);
+  transform: translateY(-5px);
 }
 
 .card h3 {
   margin-top: 0;
-  color: #38b2ac;
+  color: var(--primary);
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
@@ -26,20 +29,22 @@
 }
 
 .techItem {
-  background-color: #4a5568;
-  color: #e2e8f0;
+  background-color: var(--bg-alt);
+  color: var(--text-color);
   padding: 0.4rem 0.8rem;
   border-radius: 20px;
   font-size: 0.9rem;
+  border: 1px solid var(--border-color);
 }
 
 .details {
   margin-top: 1.5rem;
+  color: var(--text-color);
 }
 
 .dates {
   font-size: 0.9rem;
-  color: #a0aec0;
+  color: var(--text-dim);
   margin-bottom: 1rem;
 }
 
@@ -52,11 +57,11 @@
 
 .links a {
   text-decoration: none;
-  color: #38b2ac;
+  color: var(--primary);
   font-weight: bold;
   transition: color 0.3s ease;
 }
 
 .links a:hover {
-  color: #4fd1c5;
+  color: var(--primary-hover);
 }
