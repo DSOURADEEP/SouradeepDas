@@ -6,14 +6,15 @@ export default async function handler(req: any, res: any) {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  const apiKey = process.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY;
-
-  console.log('API Key present:', !!apiKey);
-  console.log('Available Env Keys:', Object.keys(process.env));
+  // Check for various possible naming conventions
+  const apiKey = process.env.GEMINI_API_KEY || 
+                 process.env.VITE_GEMINI_API_KEY || 
+                 process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
   if (!apiKey) {
-    console.error('Gemini API Key is missing in environment variables');
-    return res.status(500).json({ message: 'AI API Key is not configured on the server. Please add VITE_GEMINI_API_KEY to your Vercel Environment Variables. (Detected Keys: ' + Object.keys(process.env).join(', ') + ')' });
+    return res.status(500).json({ 
+      message: 'AI API Key is missing. 1. Add GEMINI_API_KEY in Vercel Settings. 2. Go to "Deployments" and click "Redeploy" on your latest build (Variables are only updated on redeploy).' 
+    });
   }
 
   const { message, context } = req.body;
