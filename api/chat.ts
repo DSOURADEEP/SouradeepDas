@@ -1,21 +1,33 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const genAI = new GoogleGenerativeAI(process.env.VITE_GEMINI_API_KEY || '');
-
 export default async function handler(req: any, res: any) {
+  // Only allow POST
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
+  const apiKey = process.env.VITE_GEMINI_API_KEY;
+
+  if (!apiKey) {
+    console.error('VITE_GEMINI_API_KEY is missing');
+    return res.status(500).json({ message: 'AI API Key is not configured on the server.' });
+  }
+
   const { message, context } = req.body;
 
+  if (!message) {
+    return res.status(400).json({ message: 'Message is required' });
+  }
+
   try {
+    const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
     const prompt = `
-      You are an AI assistant for Souradeep Das's portfolio. 
-      Answer questions about him based on this context: ${JSON.stringify(context)}.
-      Be professional, concise, and helpful.
+      You are a professional AI assistant for Souradeep Das's portfolio. 
+      Answer questions about him accurately and concisely based on this context: ${JSON.stringify(context)}.
+      If the information isn't in the context, be honest but polite.
+      
       User Question: ${message}
     `;
 
@@ -24,8 +36,8 @@ export default async function handler(req: any, res: any) {
     const text = response.text();
 
     return res.status(200).json({ text });
-  } catch (error) {
-    console.error('Chat error:', error);
-    return res.status(500).json({ message: 'Error processing chat' });
+  } catch (error: any) {
+    console.error('Chat API Error:', error);
+    return res.status(500).json({ message: 'Error from AI provider: ' + (error.message || 'Unknown error') });
   }
 }

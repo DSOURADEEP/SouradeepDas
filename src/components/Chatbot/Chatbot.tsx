@@ -37,13 +37,16 @@ const Chatbot = () => {
         body: JSON.stringify({ message, context: portfolioData }),
       });
 
-      if (!response.ok) throw new Error('Failed to fetch response');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to fetch response');
+      }
 
       const data = await response.json();
       setMessages((prev) => [...prev, { type: 'bot', text: data.text }]);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Chat error:', error);
-      setMessages((prev) => [...prev, { type: 'bot', text: 'Sorry, I am having trouble connecting right now.' }]);
+      setMessages((prev) => [...prev, { type: 'bot', text: `Chat error: ${error.message}` }]);
     } finally {
       setIsLoading(false);
     }
