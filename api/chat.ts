@@ -8,9 +8,12 @@ export default async function handler(req: any, res: any) {
 
   const apiKey = process.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY;
 
+  console.log('API Key present:', !!apiKey);
+  console.log('Available Env Keys:', Object.keys(process.env));
+
   if (!apiKey) {
     console.error('Gemini API Key is missing in environment variables');
-    return res.status(500).json({ message: 'AI API Key is not configured on the server. Please add VITE_GEMINI_API_KEY to your Vercel Environment Variables.' });
+    return res.status(500).json({ message: 'AI API Key is not configured on the server. Please add VITE_GEMINI_API_KEY to your Vercel Environment Variables. (Detected Keys: ' + Object.keys(process.env).join(', ') + ')' });
   }
 
   const { message, context } = req.body;
