@@ -1,0 +1,76 @@
+.skills {
+  padding: 6rem 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
+  justify-content: center;
+  align-items: center;
+  background-color: #2d3748;
+}
+
+.skills h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  color: #e2e8f0;
+}
+
+.groupsContainer {
+  display: flex;
+  
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1400px;
+}
+
+.skillGroup {
+  flex: 1;
+  min-width: 300px;
+}
+
+.groupTitle {
+  text-align: center;
+  color: #38b2ac;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.honeycomb {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+  list-style: none;
+  padding-left: 0;
+}
+
+.hexagon {
+  position: relative;
+  width: 100px;
+  height: 115.47px;
+  margin: 0.2rem;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: #1a202c; border: 1px solid #4a5568;
+  display: flex;
+  
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s ease;
+}
+
+.hexagon:hover {
+  background: #38b2ac;
+}
+
+.hexagonInner {
+  color: #e2e8f0;
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 0.5rem;
+}

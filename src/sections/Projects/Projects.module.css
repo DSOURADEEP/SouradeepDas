@@ -1,0 +1,120 @@
+.projects {
+  padding: 8rem 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1a202c;
+  position: relative;
+  overflow: hidden;
+}
+
+.projects h2, .projects .subtitle, .projectList {
+  z-index: 1;
+}
+
+.projects h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 3.5rem;
+  color: #e2e8f0;
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #a0aec0;
+  font-style: italic;
+}
+
+.projectList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.projectCardContainer {
+  min-height: 280px;
+  height: auto;
+}
+
+.bgAnimation > div {
+  position: absolute;
+  color: rgba(45, 55, 72, 0.5);
+  z-index: 0;
+  user-select: none;
+}
+
+.symbol1 {
+  top: 10%;
+  left: 5%;
+  font-size: 5rem;
+}
+
+.symbol2 {
+  bottom: 10%;
+  right: 5%;
+  font-size: 6rem;
+}
+
+.symbol3 {
+  top: 50%;
+  right: 15%;
+  font-size: 7rem;
+}
+
+.symbol4 {
+  bottom: 40%;
+  left: 15%;
+  font-size: 4rem;
+}
+
+.symbol5 {
+  top: 15%;
+  right: 10%;
+  font-size: 5rem;
+}
+
+.symbol6 {
+  bottom: 15%;
+  left: 8%;
+  font-size: 4.5rem;
+}
+
+.symbol7 {
+  top: 60%;
+  left: 5%;
+  font-size: 6rem;
+}
+
+.symbol8 {
+  bottom: 25%;
+  right: 12%;
+  font-size: 5.5rem;
+}
+
+@media (max-width: 1200px) {
+  .projectList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .projects {
+    padding: 4rem 1rem;
+  }
+  .projectList {
+    grid-template-columns: 1fr;
+  }
+  .projectCardContainer {
+    height: auto;
+    min-height: auto;
+  }
+  .bgAnimation > div {
+    display: none;
+  }
+}

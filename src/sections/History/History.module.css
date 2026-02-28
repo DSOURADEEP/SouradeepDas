@@ -1,0 +1,166 @@
+.history {
+  position: relative;
+  padding: 6rem 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1a202c;
+  overflow: hidden;
+}
+
+.history h2, .history .subtitle, .timeline {
+  z-index: 1;
+}
+
+.history h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  color: #e2e8f0;
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #a0aec0;
+  font-style: italic;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #2d3748;
+}
+
+.timelineNode {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 1rem 0;
+  cursor: pointer;
+  min-height: 50px;
+}
+
+.nodePoint {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #1a202c;
+  border: 4px solid #38b2ac;
+  margin-left: 8px;
+  margin-right: 2rem;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.timelineNode:hover .nodePoint {
+  transform: scale(1.2);
+}
+
+.shortTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #a0aec0;
+}
+
+.details {
+  background-color: rgba(45, 55, 72, 0.7); 
+  backdrop-filter: blur(5px);
+  padding: 2rem;
+  border-radius: 15px;
+  border: 1px solid #4a5568;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.details h3, .details h4, .details p, .details li {
+  position: relative;
+  z-index: 2;
+}
+
+.details h3 {
+  margin-top: 0;
+  color: #38b2ac;
+  font-size: 1.5rem;
+}
+
+.details h4 {
+  margin: 0.5rem 0;
+  color: #e2e8f0;
+}
+
+.meta {
+  font-size: 0.9rem;
+  color: #a0aec0;
+  margin-bottom: 1rem;
+}
+
+.details ul {
+  padding-left: 1.5rem;
+}
+
+.details li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.bgAnimation > div {
+  position: absolute;
+  color: rgba(45, 55, 72, 0.7);
+  z-index: 0;
+  user-select: none;
+}
+
+.symbol1 {
+  top: 15%;
+  left: 20%;
+  font-size: 6rem;
+}
+
+.symbol2 {
+  bottom: 25%;
+  right: 20%;
+  font-size: 5rem;
+}
+
+.symbol3 {
+  top: 50%;
+  left: 30%;
+  font-size: 4rem;
+}
+
+@media (max-width: 768px) {
+  .shortTitle {
+    font-size: 1rem;
+  }
+  .timeline::before {
+    left: 12px;
+  }
+  .nodePoint {
+    width: 20px;
+    height: 20px;
+    margin-left: 2px;
+    margin-right: 1rem;
+  }
+  .details {
+    padding: 1.5rem;
+  }
+  .bgAnimation {
+    display: none;
+  }
+}

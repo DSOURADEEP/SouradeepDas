@@ -1,0 +1,62 @@
+.card {
+  border: 1px solid #2d3748;
+  border-radius: 15px;
+  padding: 2rem;
+  background-color: rgba(45, 55, 72, 0.7); backdrop-filter: blur(5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  border-color: #38b2ac;
+}
+
+.card h3 {
+  margin-top: 0;
+  color: #38b2ac;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.techItem {
+  background-color: #4a5568;
+  color: #e2e8f0;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.details {
+  margin-top: 1.5rem;
+}
+
+.dates {
+  font-size: 0.9rem;
+  color: #a0aec0;
+  margin-bottom: 1rem;
+}
+
+.links {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.links a {
+  text-decoration: none;
+  color: #38b2ac;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.links a:hover {
+  color: #4fd1c5;
+}

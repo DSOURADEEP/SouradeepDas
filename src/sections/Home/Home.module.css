@@ -1,0 +1,135 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 6rem;
+  text-align: center;
+  color: #e2e8f0;
+  background: linear-gradient(45deg, #2d3748, #1a202c);
+  position: relative;
+  overflow: hidden;
+}
+
+.intro {
+  z-index: 1;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.nameTitle {
+  font-size: 5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.jobTitle {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+  color: #a0aec0;
+}
+
+.description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 700px;
+  margin-bottom: 2.5rem;
+  color: #a0aec0;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.ctaButton, .ctaButtonAlt {
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease; /* Added global transition */
+}
+
+.ctaButton {
+  background: #38b2ac;
+  color: #1a202c;
+  box-shadow: 0 5px 15px rgba(56, 178, 172, 0.3);
+}
+
+.ctaButton:hover {
+  box-shadow: 0 8px 25px rgba(56, 178, 172, 0.5);
+  transform: translateY(-2px);
+}
+
+.ctaButtonAlt {
+  background: transparent;
+  color: #38b2ac;
+  border: 2px solid #38b2ac;
+}
+
+.ctaButtonAlt:hover {
+  background: rgba(56, 178, 172, 0.1);
+  box-shadow: 0 5px 15px rgba(56, 178, 172, 0.2);
+  transform: translateY(-2px);
+}
+
+.bubble {
+  position: absolute;
+  color: rgba(160, 174, 192, 0.1);
+  z-index: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: rgba(160, 174, 192, 0.05);
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+.bubble:hover {
+  color: rgba(226, 232, 240, 0.8);
+  background-color: rgba(160, 174, 192, 0.1);
+  transform: scale(1.1);
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1a202c;
+  color: #e2e8f0;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 768px) {
+  .nameTitle {
+    font-size: 3rem;
+  }
+  .jobTitle {
+    font-size: 1.5rem;
+  }
+  .description {
+    font-size: 1rem;
+  }
+  .buttonContainer {
+    flex-direction: column;
+  }
+  .ctaButton, .ctaButtonAlt {
+    width: 90%;
+  }
+}

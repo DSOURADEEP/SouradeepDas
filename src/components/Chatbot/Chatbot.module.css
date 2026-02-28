@@ -1,0 +1,122 @@
+.fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #38b2ac;
+  border: none;
+  font-size: 1.8rem; /* Adjusted font size for better centering */
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 1001;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0; /* Ensure no padding interferes with centering */
+}
+
+.fab > div { /* Target the motion.div directly */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chatWindow {
+  position: fixed;
+  bottom: 7rem;
+  right: 2rem;
+  width: 350px;
+  height: 500px;
+  background-color: #252e3d;
+  border-radius: 15px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.4);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chatHeader {
+  padding: 1rem;
+  background-color: #1a202c;
+  color: #e2e8f0;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: #e2e8f0;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.chatMessages {
+  flex-grow: 1;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.messageContainer {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.botMessage, .userMessage {
+  padding: 0.8rem 1rem;
+  border-radius: 20px;
+  max-width: 80%;
+}
+
+.botMessage {
+  background-color: #4a5568;
+  color: #e2e8f0;
+}
+
+.userMessage {
+  background-color: #38b2ac;
+  color: #1a202c;
+}
+
+.chatInputArea {
+  padding: 1rem;
+  border-top: 1px solid #4a5568;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.suggestionBtn {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #4a5568;
+  border: none;
+  color: #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.2s ease;
+}
+
+.suggestionBtn:hover {
+  background-color: #38b2ac;
+  color: #1a202c;
+}
+
+@media (max-width: 480px) {
+  .chatWindow {
+    width: calc(100% - 2rem);
+    height: 70vh;
+    bottom: 1rem;
+    right: 1rem;
+  }
+  .fab {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}

@@ -1,0 +1,21 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #1a202c;
+}
+
+.main {
+  flex: 1;
+}
+
+.progressBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: #38b2ac;
+  transform-origin: 0%;
+  z-index: 1001;
+}
