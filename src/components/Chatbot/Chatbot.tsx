@@ -62,7 +62,7 @@ const Chatbot = () => {
           >
             <div className={styles.chatHeader}>
               <p>Souradeep's Assistant</p>
-              <button onClick={() => setIsOpen(false)} className={styles.closeBtn}>×</button>
+              <button onClick={() => setIsOpen(false)} className={styles.closeBtn}>X</button>
             </div>
             <div className={styles.chatMessages}>
               <div className={styles.messageContainer}>
