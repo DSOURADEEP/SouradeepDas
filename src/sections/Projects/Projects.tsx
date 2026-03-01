@@ -6,6 +6,7 @@ import { Element } from "react-scroll";
 import { motion } from "framer-motion";
 import { FaPython, FaJava, FaReact } from 'react-icons/fa';
 import { SiSpringboot, SiCplusplus, SiOpenai, SiGooglecloud } from 'react-icons/si';
+import Reveal from "../../components/Reveal/Reveal";
 
 
 const Projects = () => {
@@ -23,33 +24,32 @@ const Projects = () => {
         <motion.div className={styles.symbol7} animate={{ y: [-10, 10, -10] }} transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}><SiGooglecloud /></motion.div>
         <motion.div className={styles.symbol8} animate={{ scale: [0.9, 1, 0.9], rotate: [0, -10, 0] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}><SiCplusplus /></motion.div>
       </div>
-      <motion.h2
-        initial={{ opacity: 0, y: -50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-      >
-        My Projects
-      </motion.h2>
-      <p className={styles.subtitle}>Hover over a project to see more details</p>
+      <Reveal direction="down">
+        <h2 className={styles.title}>My Projects</h2>
+      </Reveal>
+      <Reveal delay={0.2}>
+        <p className={styles.subtitle}>Hover over a project to see more details</p>
+      </Reveal>
       <div className={styles.projectList}>
         {portfolioData.projects.map((project, index) => (
-          <motion.div
-            key={project.name}
-            className={styles.projectCardContainer}
-            onMouseEnter={() => setExpandedProject(project.name)}
-            onMouseLeave={() => setExpandedProject(null)}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            layout
+          <Reveal 
+            key={project.name} 
+            delay={index * 0.1} 
+            direction={index % 2 === 0 ? "left" : "right"}
+            width="100%"
           >
-            <ProjectCard
-              project={project}
-              isExpanded={expandedProject === project.name}
-            />
-          </motion.div>
+            <motion.div
+              className={styles.projectCardContainer}
+              onMouseEnter={() => setExpandedProject(project.name)}
+              onMouseLeave={() => setExpandedProject(null)}
+              layout
+            >
+              <ProjectCard
+                project={project}
+                isExpanded={expandedProject === project.name}
+              />
+            </motion.div>
+          </Reveal>
         ))}
       </div>
     </Element>

@@ -5,10 +5,10 @@ import Home from "./sections/Home/Home";
 import Projects from "./sections/Projects/Projects";
 import Skills from "./sections/Skills/Skills";
 import History from "./sections/History/History";
+import TerminalWidget from "./components/Terminal/TerminalWidget";
 import styles from "./App.module.css";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import Chatbot from "./components/Chatbot/Chatbot";
 import { Element } from "react-scroll"; // Import Element
 
 
@@ -60,7 +60,7 @@ function App() {
         </Section>
       </main>
       <Footer />
-      <Chatbot />
+      <TerminalWidget />
     </div>
   );
 }

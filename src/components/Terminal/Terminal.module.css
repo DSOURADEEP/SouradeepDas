@@ -1,0 +1,140 @@
+.terminalWrapper {
+  width: 100%;
+  max-width: 500px;
+  height: 400px;
+  background-color: var(--bg-color);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+  border: 1px solid var(--border-color);
+  cursor: text;
+  transition: background-color 0.3s ease;
+}
+
+.terminalHeader {
+  height: 32px;
+  background-color: var(--bg-alt);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  position: relative;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+.closeButton {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+}
+
+.terminalBody {
+  flex: 1;
+  padding: 0.8rem;
+  overflow-y: auto;
+  color: var(--text-color);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+/* Custom Scrollbar for Terminal */
+.terminalBody::-webkit-scrollbar {
+  width: 6px;
+}
+.terminalBody::-webkit-scrollbar-track {
+  background: transparent;
+}
+.terminalBody::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+.line {
+  margin-bottom: 0.2rem;
+  word-break: break-all;
+}
+
+.prompt {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.user { color: var(--primary); font-weight: bold; }
+.at { color: var(--text-color); }
+.host { color: #ecc94b; font-weight: bold; }
+.colon { color: var(--text-color); }
+.tilde { color: #4299e1; }
+.dollar { color: var(--text-color); }
+
+.output {
+  margin-left: 0.5rem;
+  color: var(--text-dim);
+}
+
+.helpList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  margin: 0.4rem 0;
+}
+
+.inputLine {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+}
+
+@media (max-width: 500px) {
+  .terminalWrapper {
+    height: 350px;
+    max-width: 90vw;
+  }
+  .prompt .host, .prompt .at {
+    display: none;
+  }
+}

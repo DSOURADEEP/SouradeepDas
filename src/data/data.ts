@@ -61,11 +61,11 @@ export const portfolioData = {
       github: "https://github.com/DSOURADEEP/Algorithmic-Trading-and-Backtesting-Platform"
     },
     {
-      name: "KPI Dashboard Builder",
-      tech: ["TypeScript", "SQL", "Chart.js", "Node.js"],
+      name: "IaC Compliance Linter (Enterprise Edition)",
+      tech: ["Python", "Terraform", "Kubernetes", "DevSecOps", "HCL2"],
       dates: "Jun. 2025 – Jul. 2025",
-      description: "Created a dynamic dashboard builder for real-time KPI visualization. Enabled users to define, filter, and manage custom SQL-based widgets. Built interactive, responsive charts using Chart.js and TypeScript. Designed a modular interface to support reusable dashboards across teams.",
-      github: "https://github.com/SDE-SOURADEEP/KPI-Dashboard-Builder-Backend"
+      description: "High-performance, modular Infrastructure-as-Code (IaC) linter for enforcing DevSecOps policies across Terraform and Kubernetes. Features a plugin-based architecture, multithreaded engine with MD5-based caching, and context-aware reporting in SARIF, JSON, and Markdown formats. Includes bundled rules for AWS S3 security, IAM compliance, and Kubernetes resource limits.",
+      github: "https://github.com/DSOURADEEP/Linter---Infrastructure-as-a-Code"
     },
     {
       name: "RAG Document ChatBot",

@@ -1,0 +1,55 @@
+.terminalWidget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 15px;
+}
+
+.floatingTerminal {
+  width: 450px;
+  height: 400px;
+  max-width: 90vw;
+  max-height: 80vh;
+}
+
+.fab {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  background-color: var(--primary-hover);
+}
+
+.fabOpen {
+  background-color: #ff5f56;
+  transform: rotate(90deg);
+}
+
+.fabOpen:hover {
+  background-color: #ff4740;
+}
+
+@media (max-width: 768px) {
+  .floatingTerminal {
+    width: calc(100vw - 40px);
+    right: 0;
+  }
+}
