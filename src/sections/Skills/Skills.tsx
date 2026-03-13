@@ -3,6 +3,7 @@ import styles from "./Skills.module.css";
 import { Element } from "react-scroll";
 import { motion } from "framer-motion";
 import Reveal from "../../components/Reveal/Reveal";
+import AnimatedTitle from "../../components/AnimatedTitle/AnimatedTitle";
 
 const SkillGroup = ({ title, skills, index }: { title: string; skills: string[]; index: number }) => (
   <Reveal delay={index * 0.1} direction={index % 2 === 0 ? "left" : "right"}>
@@ -26,12 +27,13 @@ const SkillGroup = ({ title, skills, index }: { title: string; skills: string[];
   </Reveal>
 );
 
+// Cyberpunk Skills Section
 const Skills = () => {
   return (
     <Element name="skills" className={styles.skills}>
-      <Reveal direction="down">
-        <h2>Technical Skills</h2>
-      </Reveal>
+      <div className={styles.headerArea}>
+        <AnimatedTitle title="Technical Skills" targetWord="Skills" />
+      </div>
       <div className={styles.groupsContainer}>
         <SkillGroup index={0} title="Languages" skills={portfolioData.skills.languages} />
         <SkillGroup index={1} title="Frameworks" skills={portfolioData.skills.frameworks} />

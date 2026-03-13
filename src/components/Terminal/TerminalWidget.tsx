@@ -9,8 +9,7 @@ interface TerminalLine {
   content: string | React.ReactNode;
 }
 
-const TerminalWidget = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const TerminalWidget = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
   const [history, setHistory] = useState<TerminalLine[]>([
     { type: 'output', content: 'Welcome to SD-OS v1.0.0 (Souradeep Das Operating System)' },
     { type: 'output', content: 'Type "help" to see available commands.' },
@@ -28,20 +27,13 @@ const TerminalWidget = () => {
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
           >
             <Terminal 
-              onClose={() => setIsOpen(false)} 
+              onClose={onClose} 
               history={history} 
               setHistory={setHistory} 
             />
           </motion.div>
         )}
       </AnimatePresence>
-      <button 
-        className={`${styles.fab} ${isOpen ? styles.fabOpen : ''}`} 
-        onClick={() => setIsOpen(!isOpen)}
-        aria-label="Toggle Terminal"
-      >
-        {isOpen ? <FaTimes /> : <FaTerminal />}
-      </button>
     </div>
   );
 };

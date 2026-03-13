@@ -5,7 +5,6 @@ interface ProjectCardProps {
   project: {
     name: string;
     tech: string[];
-    dates: string;
     description: string;
     github?: string;
     liveDemo?: string;
@@ -34,7 +33,6 @@ const ProjectCard = ({ project, isExpanded }: ProjectCardProps) => {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className={styles.details}
           >
-            <p className={styles.dates}>{project.dates}</p>
             <p>{project.description}</p>
             <div className={styles.links}>
               {project.github && (

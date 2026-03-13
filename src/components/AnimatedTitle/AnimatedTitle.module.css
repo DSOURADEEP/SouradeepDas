@@ -1,0 +1,33 @@
+.title {
+  position: relative;
+  display: inline-block;
+  font-size: 3rem;
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  margin-bottom: 2rem;
+  font-family: var(--font-heading);
+}
+
+.targetWrapper {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
+
+.targetWord {
+  position: relative;
+  z-index: 2;
+  color: var(--primary);
+  text-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
+}
+
+.underline {
+  position: absolute;
+  bottom: -10px;
+  left: -5%;
+  width: 110%;
+  height: 25px;
+  z-index: 0;
+  filter: drop-shadow(0 0 5px var(--primary));
+}

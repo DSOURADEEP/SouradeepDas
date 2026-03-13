@@ -1,24 +1,46 @@
-.header {
+.headerWrapper {
   position: fixed;
-  top: 0;
+  top: 15px;
   left: 0;
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background-color: var(--header-bg);
-  backdrop-filter: blur(10px);
+  justify-content: center;
   z-index: 1000;
-  border-bottom: 1px solid var(--border-color);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  pointer-events: none;
 }
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--text-color);
+.headerContainer {
+  width: 95%;
+  max-width: 1400px;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+  border-radius: 30px;
+  pointer-events: auto;
+}
+
+.logoArea {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   flex: 1;
+}
+
+.logoIcon {
+  width: 24px;
+  height: 24px;
+  background-color: var(--text-color);
+  border-radius: 4px;
+}
+
+.logoText {
+  font-family: var(--font-mono);
+  font-weight: bold;
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  color: var(--text-color);
 }
 
 .navContainer {
@@ -26,9 +48,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: calc(120px * 4);
-  height: 60px;
-  flex: 2;
+  width: calc(100px * 4);
+  height: 40px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .navTrack {
@@ -39,61 +63,103 @@
 }
 
 .navItem {
-  width: 120px;
+  width: 100px;
   flex-shrink: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   color: var(--text-dim);
   user-select: none;
   z-index: 2;
-  transition: color 0.3s ease;
-  pointer-events: auto;
+  transition: color 0.3s var(--transition-cb);
   cursor: pointer;
 }
 
 .navItem.active {
-  color: var(--text-color);
-  transform: scale(1.05);
+  color: var(--bg-color);
+  font-weight: bold;
 }
 
 .selector {
   position: absolute;
   top: 0;
   left: 0;
-  width: 120px;
-  height: 60px;
-  border: 3px solid var(--primary);
-  border-radius: 30px;
-  cursor: pointer;
+  width: 100px;
+  height: 40px;
+  background-color: var(--primary);
+  border-radius: 20px;
   z-index: 1;
-  box-shadow: 0 0 10px rgba(56, 178, 172, 0.5);
+  box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
 }
 
-.themeToggle {
-  background: none;
-  border: none;
-  color: var(--text-color);
-  font-size: 1.5rem;
-  cursor: pointer;
+.statusArea {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 0.5rem;
-  border-radius: 50%;
-  transition: background-color 0.3s ease;
+  gap: 2rem;
   flex: 1;
   justify-content: flex-end;
 }
 
-.themeToggle:hover {
-  background-color: var(--bg-alt);
+.statusIndicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--tertiary);
+  letter-spacing: 0.1em;
 }
 
-@media (max-width: 768px) {
-  .logo {
+.statusPulse {
+  width: 8px;
+  height: 8px;
+  background-color: var(--tertiary);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--tertiary);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(173, 255, 0, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(173, 255, 0, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(173, 255, 0, 0); }
+}
+
+.consoleBtn {
+  background: rgba(0, 242, 255, 0.1);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.3s var(--transition-cb);
+}
+
+.consoleBtn:hover {
+  background: var(--primary);
+  color: var(--bg-color);
+  box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+}
+
+@media (max-width: 900px) {
+  .logoText, .statusIndicator {
     display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .navContainer {
+    display: none;
+  }
+  .headerContainer {
+    justify-content: space-between;
   }
 }

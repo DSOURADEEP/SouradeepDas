@@ -1,63 +1,38 @@
+import { useEffect, useState } from "react";
 import { portfolioData } from "../../data/data";
 import styles from "./Home.module.css";
 import { Element, scroller } from "react-scroll";
-import { motion, AnimatePresence } from "framer-motion";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { useState } from "react";
-
-const sentence = {
-  hidden: { opacity: 1 },
-  visible: {
-    opacity: 1,
-    transition: {
-      delay: 0.5,
-      staggerChildren: 0.08,
-    },
-  },
-};
-
-const letter = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-  },
-};
-
-const Bubble = ({ icon, link, style, name }: { icon: React.ReactNode; link: string; style: React.CSSProperties, name: string }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  
-  return (
-    <motion.a
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={styles.bubble}
-      style={style}
-      animate={{ y: [0, -20, 0] }}
-      transition={{ duration: Math.random() * 5 + 5, repeat: Infinity, ease: "easeInOut" }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {icon}
-      <AnimatePresence>
-      {isHovered && (
-        <motion.div 
-          className={styles.tooltip}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 10 }}
-        >
-          Click to visit my {name}
-        </motion.div>
-      )}
-      </AnimatePresence>
-    </motion.a>
-  );
-};
-
+import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
+import { FaArrowRight } from "react-icons/fa";
 
 const Home = () => {
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+  const [showSourceMenu, setShowSourceMenu] = useState(false);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  useEffect(() => {
+    setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      // Normalize mouse position between -1 and 1
+      mouseX.set((e.clientX / window.innerWidth) * 2 - 1);
+      mouseY.set((e.clientY / window.innerHeight) * 2 - 1);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
+
+  // Smooth out the mouse values for parallax
+  const springX = useSpring(mouseX, { stiffness: 100, damping: 30 });
+  const springY = useSpring(mouseY, { stiffness: 100, damping: 30 });
+
+  const card1X = useTransform(springX, [-1, 1], [-20, 20]);
+  const card1Y = useTransform(springY, [-1, 1], [-20, 20]);
+  const card2X = useTransform(springX, [-1, 1], [30, -30]);
+  const card2Y = useTransform(springY, [-1, 1], [30, -30]);
+
   const scrollToProjects = () => {
     scroller.scrollTo("projects", {
       smooth: true,
@@ -66,73 +41,94 @@ const Home = () => {
     });
   };
 
-  const nameParts = portfolioData.name.split(" ");
-
   return (
     <Element name="home" className={styles.home}>
-      <Bubble icon={<FaGithub />} name="GitHub" link={portfolioData.social.github} style={{ top: '15%', left: '10%', fontSize: '4.5rem' }} />
-      <Bubble icon={<FaLinkedin />} name="LinkedIn" link={portfolioData.social.linkedin} style={{ top: '65%', right: '10%', fontSize: '4.5rem' }} />
-      <Bubble icon={<FaGithub />} name="GitHub" link={portfolioData.social.github} style={{ bottom: '15%', left: '20%', fontSize: '3rem' }} />
-      <Bubble icon={<FaLinkedin />} name="LinkedIn" link={portfolioData.social.linkedin} style={{ top: '25%', right: '20%', fontSize: '3.5rem' }} />
+      {/* Animated Radial Gradient Background is handled in CSS */}
+      <div className={styles.radialGlow}></div>
 
-      <div className={styles.intro}>
-        <motion.h1
-          className={styles.nameTitle}
-          variants={sentence}
-          initial="hidden"
-          animate="visible"
-        >
-          {nameParts.map((part, partIndex) => (
-            <span key={partIndex} style={{ display: 'inline-block', marginRight: '1.5rem' }}>
-              {part.split("").map((char, index) => (
-                <motion.span key={char + "-" + index} variants={letter} style={{ display: 'inline-block' }}>
-                  {char}
-                </motion.span>
-              ))}
-            </span>
-          ))}
-        </motion.h1>
-        <motion.h2
-          className={styles.jobTitle}
-          initial={{ opacity: 0, y: 50 }}
+      {/* Floating Parallax Glass Cards */}
+      <motion.div 
+        className={`${styles.floatingCard} glass-card`} 
+        style={{ top: '15%', left: '10%', x: card1X, y: card1Y }}
+      >
+        <span className="tech-text">SEC_LVL_01</span>
+        <div className={styles.dataBar}></div>
+      </motion.div>
+
+      <motion.div 
+        className={`${styles.floatingCard} glass-card`} 
+        style={{ bottom: '20%', right: '15%', x: card2X, y: card2Y }}
+      >
+        <span className="tech-text">SYS.UPTIME</span>
+        <div className={styles.statusPulseGroup}>
+          <div className={styles.pulseNode}></div>
+          <span>99.99%</span>
+        </div>
+      </motion.div>
+
+      <div className={styles.content}>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1.5 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          {portfolioData.title}
-        </motion.h2>
-         <motion.p
-          className={styles.description}
+          <h1 className={styles.headline}>
+            <span className={styles.gradientText}>SOURADEEP</span>
+            <br />
+            DAS
+          </h1>
+        </motion.div>
+
+        <motion.p
+          className={styles.subtext}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 1.8 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          I am a Site Reliability Engineer (Apprentice) Engineering custom internal tooling and automation solutions. Passionate about building impactful tech solutions, I am a Software Engineer driven by curiosity, continuous learning, and a love for solving real-world problems through code.
+          I am {portfolioData.name}, a {portfolioData.title}. Building production-grade systems with high-end security, automation, and real-time observability.
         </motion.p>
-        <div className={styles.buttonContainer}>
-          <motion.button
-            className={styles.ctaButton}
-            onClick={scrollToProjects}
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 2 }}
-            whileHover={{ scale: 1.05, boxShadow: '0 8px 25px rgba(56, 178, 172, 0.5)' }}
-            whileTap={{ scale: 0.95 }}
-          >
-            View My Work
-          </motion.button>
-           <motion.a
-            href="/Souradeep_Das_Resume.pdf"
-            download="Souradeep_Das_Resume.pdf"
-            className={styles.ctaButtonAlt}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 2 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Let me help you with hiring me
-          </motion.a>
-        </div>
+
+        <motion.div 
+          className={styles.ctaGroup}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <button className={styles.primaryCta} onClick={scrollToProjects}>
+            INITIALIZE <FaArrowRight className={styles.arrow} />
+          </button>
+          
+          <div className={styles.sourceWrapper}>
+            <button 
+              className={`${styles.secondaryCta} glass-card`}
+              onClick={() => setShowSourceMenu(!showSourceMenu)}
+            >
+              ABOUT_ME
+            </button>
+            
+            <AnimatePresence>
+              {showSourceMenu && (
+                <motion.div 
+                  className={`${styles.sourceMenu} glass-card`}
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <a href={portfolioData.social.github} target="_blank" rel="noreferrer" className={styles.menuItem}>
+                    <span>01</span> GITHUB_REPO
+                  </a>
+                  <a href={portfolioData.social.linkedin} target="_blank" rel="noreferrer" className={styles.menuItem}>
+                    <span>02</span> LINKEDIN_PROFILE
+                  </a>
+                  <a href="/Souradeep_Das_Resume.pdf" download className={styles.menuItem}>
+                    <span>03</span> DOWNLOAD_CV
+                  </a>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </motion.div>
       </div>
     </Element>
   );

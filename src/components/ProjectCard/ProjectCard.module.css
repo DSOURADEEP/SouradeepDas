@@ -1,67 +1,80 @@
 .card {
-  border: 1px solid var(--border-color);
-  border-radius: 15px;
-  padding: 2rem;
-  background-color: var(--card-bg);
-  backdrop-filter: blur(5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-  cursor: pointer;
+  padding: 2.5rem;
+  border-radius: 10px;
+  background-color: var(--bg-color); /* Deep background inside the glass wrapper */
   height: 100%;
-}
-
-.card:hover {
-  border-color: var(--primary);
-  transform: translateY(-5px);
 }
 
 .card h3 {
   margin-top: 0;
-  color: var(--primary);
-  font-size: 1.5rem;
+  color: var(--text-color);
+  font-size: 2rem;
   margin-bottom: 1rem;
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
 }
 
 .tech {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.techItem {
-  background-color: var(--bg-alt);
-  color: var(--text-color);
-  padding: 0.4rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  border: 1px solid var(--border-color);
-}
-
-.details {
-  margin-top: 1.5rem;
-  color: var(--text-color);
-}
-
-.dates {
-  font-size: 0.9rem;
-  color: var(--text-dim);
+  gap: 0.8rem;
   margin-bottom: 1rem;
 }
 
+.techItem {
+  background-color: rgba(0, 242, 255, 0.1);
+  color: var(--primary);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid rgba(0, 242, 255, 0.2);
+}
+
+.details {
+  margin-top: 2rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.dates {
+  font-size: 0.85rem;
+  color: var(--secondary);
+  margin-bottom: 1.5rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
 .links {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
   flex-wrap: wrap;
 }
 
 .links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   text-decoration: none;
-  color: var(--primary);
+  color: var(--text-color);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
   font-weight: bold;
-  transition: color 0.3s ease;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.3s var(--transition-cb);
+}
+
+.links a::before {
+  content: '>';
+  color: var(--primary);
 }
 
 .links a:hover {
-  color: var(--primary-hover);
+  color: var(--primary);
 }

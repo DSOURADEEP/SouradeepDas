@@ -1,68 +1,111 @@
 :root {
-  --bg-color: #1a202c;
-  --bg-alt: #2d3748;
-  --text-color: #e2e8f0;
-  --text-dim: #a0aec0;
-  --primary: #38b2ac;
-  --primary-hover: #4fd1c5;
-  --card-bg: rgba(45, 55, 72, 0.7);
-  --header-bg: rgba(26, 32, 44, 0.8);
-  --border-color: #2d3748;
-}
+  --bg-color: #050505;
+  --text-color: #ffffff;
+  --text-dim: rgba(255, 255, 255, 0.6);
+  --primary: #00f2ff; /* Neon Cyan */
+  --secondary: #ff00e5; /* Neon Magenta */
+  --tertiary: #adff00; /* Neon Lime */
+  
+  --card-bg: rgba(255, 255, 255, 0.025);
+  --header-bg: rgba(5, 5, 5, 0.8);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.15);
 
-[data-theme='light'] {
-  --bg-color: #f7fafc;
-  --bg-alt: #edf2f7;
-  --text-color: #1a202c;
-  --text-dim: #4a5568;
-  --primary: #319795;
-  --primary-hover: #2c7a7b;
-  --card-bg: rgba(255, 255, 255, 0.8);
-  --header-bg: rgba(255, 255, 255, 0.8);
-  --border-color: #e2e8f0;
+  --font-heading: 'Outfit', sans-serif; /* Fallback for Cabinet Grotesk */
+  --font-body: 'Inter', sans-serif; /* Fallback for Satoshi */
+  --font-mono: 'Space Grotesk', monospace;
+  
+  --transition-cb: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-body);
   background-color: var(--bg-color);
   color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  line-height: 1.7;
+  overflow-x: hidden;
 }
 
-/* Custom Scrollbar for Entire Site */
-::-webkit-scrollbar {
-  width: 10px;
+/* Background Grid (40x40 at 3% opacity) */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: -2;
+  pointer-events: none;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--bg-alt);
+/* Global Scanline Effect */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--primary), transparent);
+  opacity: 0.5;
+  z-index: 9999;
+  pointer-events: none;
+  animation: scanline 8s linear infinite;
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 5px;
-  border: 2px solid var(--bg-alt);
+@keyframes scanline {
+  0% { transform: translateY(-10vh); }
+  100% { transform: translateY(110vh); }
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-hover);
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  margin: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1 { font-weight: 900; }
+h2 { font-weight: 900; }
+
+.tech-text {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0.2em;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
+/* Glassmorphism Global Utilities */
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  transition: transform 0.4s var(--transition-cb), border-color 0.4s var(--transition-cb);
 }
+
+.glass-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-hover);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-color); border-left: 1px solid var(--border-color); }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
 a {
   color: var(--primary);
   text-decoration: none;
+  transition: color 0.3s var(--transition-cb);
 }
+
+a:hover { color: var(--secondary); }
+
+*, *::before, *::after { box-sizing: border-box; }
