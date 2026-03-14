@@ -1,6 +1,6 @@
 # My Portfolio
 
-**Live Demo:** https://souradeepdasportfolio-dsouradeeps-projects.vercel.app/
+**Live Demo:** https://souradeepdasportfolio.vercel.app/
 
 This is my professional portfolio website, showcasing my work experience, technical skills, and key projects.
 
